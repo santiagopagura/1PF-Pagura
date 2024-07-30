@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { PeriodicElement } from '../../../models';
 
 @Component({
   selector: 'app-students-dialog',
@@ -14,13 +15,19 @@ export class StudentsDialogComponent {
 
   constructor(
     private fb: FormBuilder,
-    private matDialogRef: MatDialogRef<StudentsDialogComponent>
+    private matDialogRef: MatDialogRef<StudentsDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public studentToEdit?:PeriodicElement  
   ) {
     this.studentsForm= this.fb.group(
       {
         name: [null, Validators.required],
       }
     );
+    console.log('se esta editando', this.studentToEdit)
+
+    if (this.studentToEdit) {
+     this.studentsForm.patchValue(this.studentToEdit)
+  }
   }
   onSubmit():void{
     console.log('holissss', this.studentsForm.value);

@@ -46,4 +46,14 @@ constructor(private matDialog: MatDialog){};
   deleteStudentById(id:number) {
     this.dataSource = this.dataSource.filter((el)=>el.id != id)
   }
+
+  editStudent(studentToEdit:PeriodicElement){
+     this.matDialog.open(StudentsDialogComponent, {data:studentToEdit}).afterClosed().subscribe({
+      next: (value) =>{
+        if (!!value) {
+          this.dataSource = this.dataSource.map((el)=>el.id === studentToEdit.id? {...value, id: studentToEdit.id} : el);
+        }
+      }
+  })
+  }
 }
