@@ -1,9 +1,19 @@
 <h2 mat-dialog-title>{{ studentToEdit ? 'Editando' +studentToEdit.name : 'Agregar nuevo alumno'}}</h2>
 <mat-dialog-content>
- <form [formGroup]="studentsForm" >
+ <form [formGroup]="studentsForm" class="d-flex flex-column" >
     <mat-form-field>
       <mat-label>Nombre:</mat-label>
       <input matInput formControlName="name"/>
+      <mat-error>El campo es requerido</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Apellido:</mat-label>
+      <input matInput formControlName="surname"/>
+      <mat-error>El campo es requerido</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>DNI:</mat-label>
+      <input matInput formControlName="id"/>
       <mat-error>El campo es requerido</mat-error>
     </mat-form-field>
   </form>
@@ -11,5 +21,5 @@
 
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancelar</button>
-  <button (click)="onSubmit()" mat-button>Guardar</button>
+  <button (click)="onSubmit()" [disabled]="studentsForm.invalid" mat-button>Guardar</button>
 </mat-dialog-actions>

@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { PeriodicElement } from '../../../models';
+import { Estudiante } from '../../../models';
+
 
 @Component({
   selector: 'app-students-dialog',
@@ -16,11 +17,13 @@ export class StudentsDialogComponent {
   constructor(
     private fb: FormBuilder,
     private matDialogRef: MatDialogRef<StudentsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public studentToEdit?:PeriodicElement  
+    @Inject(MAT_DIALOG_DATA) public studentToEdit?:Estudiante  
   ) {
     this.studentsForm= this.fb.group(
       {
         name: [null, Validators.required],
+        surname: [null, Validators.required],
+        id: [null, [Validators.required, Validators.pattern('^[0-9]+$')]],
       }
     );
     console.log('se esta editando', this.studentToEdit)

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentsDialogComponent } from './components/students-dialog/students-dialog.component';
-import { PeriodicElement } from '../models';
+import { Estudiante } from '../models';
 
 
-const Estudiantado: PeriodicElement[] = [
+const Estudiantado: Estudiante[] = [
   {position: 1, name: 'Hydrogen', surname: "lopez", id: 56485358},
   {position: 2, name: 'Helium', surname: "Gomez", id: 56451358},
   {position: 3, name: 'Lithium', surname:"Perez", id: 54851358},
@@ -47,7 +47,7 @@ constructor(private matDialog: MatDialog){};
     this.dataSource = this.dataSource.filter((el)=>el.id != id)
   }
 
-  editStudent(studentToEdit:PeriodicElement){
+  editStudent(studentToEdit:Estudiante){
      this.matDialog.open(StudentsDialogComponent, {data:studentToEdit}).afterClosed().subscribe({
       next: (value) =>{
         if (!!value) {

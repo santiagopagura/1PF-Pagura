@@ -1,3 +1,40 @@
 <button (click)="openDialog()" mat-flat-button><mat-icon>add</mat-icon>Agregar Curso</button>
 
 <p>El nombre del curso es: {{nombreCurso}} </p>
+
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="start">
+    <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
+    <td mat-cell *matCellDef="let element"> {{element.start}} </td>
+  </ng-container>
+  <ng-container matColumnDef="end">
+    <th mat-header-cell *matHeaderCellDef> Fecha de finalizacion </th>
+    <td mat-cell *matCellDef="let element"> {{element.end}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td mat-cell *matCellDef="let element"> 
+      <button (click)="deleteCourseById(element.id)" mat-icon-button><mat-icon>delete</mat-icon></button>
+      <button (click)="editCourse(element)" mat-icon-button><mat-icon>edit</mat-icon> </button>
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
