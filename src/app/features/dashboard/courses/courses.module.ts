@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MatTableModule } from '@angular/material/table';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTableModule
+    MatTableModule, 
+    MatProgressSpinnerModule
   ]
 })
 export class CoursesModule { }

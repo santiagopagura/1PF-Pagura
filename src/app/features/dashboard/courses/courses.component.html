@@ -2,6 +2,9 @@
 
 <p>El nombre del curso es: {{nombreCurso}} </p>
 
+@if (isLoading) {
+  <mat-spinner></mat-spinner>
+} @else {
 
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -38,3 +41,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+}

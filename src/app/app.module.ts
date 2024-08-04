@@ -7,6 +7,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { AuthRoutingModule } from './features/auth/auth-routing.module';
 import { AuthModule } from './features/auth/auth.module';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { AuthModule } from './features/auth/auth.module';
     AuthModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(), {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
   ],
   bootstrap: [AppComponent]
 })

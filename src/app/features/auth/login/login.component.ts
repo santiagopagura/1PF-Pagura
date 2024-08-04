@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../../core/services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -6,5 +8,22 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  loginForm: FormGroup;
+
+  constructor(private authService: AuthService, private fb: FormBuilder) {  
+    this.loginForm = this.fb.group({
+      email:['', Validators.required, Validators.email],
+      password: ['', Validators.required],
+      role: ['admin', Validators.required],
+    })
+  }
+
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      alert('El formulario no es valido');
+    } else {
+      this.authService.login();
+    }
+  }
 
 }
