@@ -2,10 +2,11 @@
   <!-- Sidebar inicio -->
   <mat-drawer [opened]="true" #drawer class="example-sidenav" mode="side">
     <mat-nav-list>
-      <a mat-list-item href="..." >inicio</a>
-      <a mat-list-item href="..." >Alumnos</a>
-      <a mat-list-item href="..." >Cursos</a>
-      <a mat-list-item href="..." >Inscripcion</a>
+      <a mat-list-item >inicio</a>
+      <a mat-list-item routerLink="students">Alumnos</a>
+      <a mat-list-item routerLink="/dashboard/courses" >Cursos</a>
+      <a mat-list-item >Inscripcion</a>
+      <a mat-list-item routerLink="/auth" >Cerrar sesion</a>
     </mat-nav-list>
   </mat-drawer>
 <!-- main content inicio -->
@@ -29,8 +30,9 @@
       </button> -->
     </mat-toolbar>
     <main>
-      <app-courses/>
-      <app-students/>
+      <router-outlet/>
+      <!-- <app-courses/> -->
+      <!-- <app-students/> -->
     </main>
     <!-- <h2>Tarhjetas</h2>
     <mat-card class="example-card" appearance="outlined">
