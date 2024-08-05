@@ -8,6 +8,7 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
 import { AuthRoutingModule } from './features/auth/auth-routing.module';
 import { AuthModule } from './features/auth/auth.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     AuthModule
   ],
   providers: [
-    provideAnimationsAsync(), {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
+    provideAnimationsAsync(),
+    provideNativeDateAdapter(),
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
   ],
   bootstrap: [AppComponent]
 })

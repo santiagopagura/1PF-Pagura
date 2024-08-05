@@ -21,7 +21,7 @@ const Estudiantado: Estudiante[] = [
 export class StudentsComponent {
 
   
-  displayedColumns: string[] = ['position', 'name', 'surname', 'id', 'actions'];
+  displayedColumns: string[] = [ 'name', 'surname', 'id', 'actions'];
   dataSource = Estudiantado;
 
 

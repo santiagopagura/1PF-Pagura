@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CursosInterface } from '../../features/dashboard/models';
-import { Observable } from 'rxjs';
-import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+import { map, Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,11 @@ export class CoursesService {
       console.log('lalalal') 
     });
   }
+
+  getCourseById(id:string): Observable<CursosInterface | undefined> {
+    return this.getCourses().pipe(map((todosLosCursos) => todosLosCursos.find((el) => el.id === id) ))
+  }
+  
 
   addCourse(course: CursosInterface): Observable<CursosInterface[]> {
     this.MY_DATABASE.push(course);
