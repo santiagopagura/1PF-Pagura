@@ -9,7 +9,5 @@ export class AuthService {
   login() {
     console.log('Ejecutando login real')
   }
-  verificationToken(){}
-  obtenerUsuarioAutenticado(){}
 }
 

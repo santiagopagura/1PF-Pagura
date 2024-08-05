@@ -17,7 +17,7 @@ export class LoginComponent {
       role: ['admin', Validators.required],
     })
   }
-
+ 
   onSubmit() {
     if (this.loginForm.invalid) {
       alert('El formulario no es valido');

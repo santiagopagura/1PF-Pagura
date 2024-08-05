@@ -10,14 +10,13 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
+
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    RegisterComponent
+    LoginComponent
   ],
-  exports: [LoginComponent, RegisterComponent],
+  exports: [LoginComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
