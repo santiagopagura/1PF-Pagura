@@ -6,37 +6,25 @@ import { CoursesComponent } from './features/dashboard/courses/courses.component
 import { StudentsComponent } from './features/dashboard/students/students.component';
 import { CourseDetailComponent } from './features/dashboard/courses/pages/course-detail/course-detail.component';
 import { HomeComponent } from './features/dashboard/home/home.component';
+import { authGuard } from './core/guards/auth.guard';
 
 
 const routes: Routes = [
+  // antigua forma de hacerlo
+  // {
+  //   path: 'auth',
+  //   component: LoginComponent,
+  // },
   {
     path: 'auth',
-    component: LoginComponent,
+    // component: HomeComponent,
+    loadChildren: ()=>import('./features/auth/auth.module').then((referenciaAlArchivo)=>referenciaAlArchivo.AuthModule),
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
-    children: [
-      {
-        path: 'home',
-        component: HomeComponent,
-      },
-      {
-        path: 'courses',
-        component: CoursesComponent,
-      },
-      {path:'courses/:id',
-        component: CourseDetailComponent,
-      },
-      {
-        path: 'students',
-        component: StudentsComponent,
-      },
-      {
-        path: '**',
-        redirectTo: 'home',
-      },
-    ]
+    canActivate: [authGuard],
+    loadChildren: ()=>import('./features/dashboard/dashboard.module').then((m)=>m.DashboardModule),
   },
   {
     path:'**',

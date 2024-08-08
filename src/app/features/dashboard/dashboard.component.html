@@ -14,7 +14,7 @@
       <a mat-list-item routerLink="clases" routerLink="clases" routerLinkActive #clasesLink="routerLinkActive" [activated]="clasesLink.isActive" 
       >Clases</a>
 
-      <a mat-list-item routerLink="/auth" routerLinkActive="link-activo" 
+      <a mat-list-item (click)="logout()" routerLinkActive="link-activo" 
       >Cerrar sesion</a>
     </mat-nav-list>
   </mat-drawer>

@@ -24,10 +24,7 @@ import { SharedModule } from '../../shared/shared.module';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
-    CoursesModule,
-    StudentsModule,
-    SharedModule,
-    HomeModule
+    SharedModule
   ]
 })
 export class DashboardModule { }

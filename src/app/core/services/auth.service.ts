@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   
-  constructor() { }
+  constructor(private router: Router) { }
   login() {
-    console.log('Ejecutando login real')
+    localStorage.setItem('token','ajlhsjkdhlakshda');
+    this.router.navigate(['dashboard', 'courses']);
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    this.router.navigate(['auth','login']);
   }
 }
 
+ 

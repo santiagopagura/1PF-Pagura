@@ -18,9 +18,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DashboardModule,
-    AuthRoutingModule,
-    AuthModule
+    AuthRoutingModule
   ],
   providers: [
     provideAnimationsAsync(),
