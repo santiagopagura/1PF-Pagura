@@ -19,7 +19,23 @@
       "end": "2024-08-30T22:00:00.000Z"
     }
   ],
-  "classes": [],
+  "classes": [
+    {
+      "id": "ef6e",
+      "studentId": "534234235",
+      "courseId": "8s35"
+    },
+    {
+      "id": "72ba",
+      "studentId": "534234235",
+      "courseId": "98Ai"
+    },
+    {
+      "id": "d7f7",
+      "studentId": "562359745",
+      "courseId": "98Ai"
+    }
+  ],
   "students": [
     {
       "name": "juan",

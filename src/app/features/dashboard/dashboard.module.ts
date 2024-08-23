@@ -9,6 +9,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import { SharedModule } from '../../shared/shared.module';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SharedModule } from '../../shared/shared.module';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
-    SharedModule
+    SharedModule,
+    MatChipsModule
   ]
 })
 export class DashboardModule { }

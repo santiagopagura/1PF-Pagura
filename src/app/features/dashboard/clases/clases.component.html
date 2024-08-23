@@ -2,9 +2,88 @@
 <p>Seleccione el curso al que quiera asignar alumnos. Utilice el DNI del alumno para agregarlo a la clase.</p>
 
 
+<div class="container">
+  <h2>Vincular Curso con Estudiantes</h2>
+  <form [formGroup]="linkForm" (ngSubmit)="linkStudentsToCourse()">
+    <div class="form-group">
+      <label for="course">Seleccionar Curso</label>
+      <select formControlName="course" class="form-control">
+        <option *ngFor="let course of courses" [value]="course.id">
+          {{ course.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="studentSearch">Buscar Estudiante por ID</label>
+      <input formControlName="studentSearch" id="studentSearch" class="form-control" placeholder="Ingrese ID del estudiante">
+    </div>
+
+    <ul *ngIf="students$ | async as students" class="search-results">
+      <li *ngFor="let student of students" (click)="addStudent(student)">
+        {{ student.name }} (ID: {{ student.id }})
+      </li>
+    </ul>
+
+    <h3>Estudiantes seleccionados:</h3>
+    <div class="selected-students">
+      <div *ngFor="let student of selectedStudents" class="chip">
+        {{ student.name }}
+        <span class="remove-btn" (click)="removeStudent(student)">x</span>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="selectedStudents.length === 0" class="btn btn-primary">
+      Vincular Estudiantes al Curso
+    </button>
+  </form>
+</div>
 
 
 
+
+
+
+<!-- <div class="container">
+  <h2>Vincular Curso con Estudiantes</h2>
+  <form [formGroup]="linkForm" (ngSubmit)="linkStudentsToCourse()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Seleccionar Curso</mat-label>
+      <mat-select formControlName="course">
+        <mat-option *ngFor="let course of courses" [value]="course.id">
+          {{ course.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="linkForm.get('course')?.invalid && linkForm.get('course')?.touched">
+        Seleccione un curso
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Buscar Estudiante por ID</mat-label>
+      <input matInput formControlName="studentSearch" placeholder="Ingrese ID del estudiante">
+    </mat-form-field>
+
+    <mat-list *ngIf="students$ | async as students">
+      <mat-list-item *ngFor="let student of students" (click)="addStudent(student)">
+        {{ student.name }} (ID: {{ student.id }})
+      </mat-list-item>
+    </mat-list>
+
+    <h3>Estudiantes seleccionados:</h3>
+    <mat-chip-list>
+      <mat-chip *ngFor="let student of selectedStudents">
+        {{ student.name }}
+      </mat-chip>
+    </mat-chip-list>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="selectedStudents.length === 0">
+      Vincular Estudiantes al Curso
+    </button>
+  </form>
+</div> -->
+
+<!-- 
 <mat-form-field>
   <input [formControl]="searchControl" matInput />
   <mat-icon matSuffix>search</mat-icon>
@@ -12,15 +91,15 @@
 
 @if (loading) {
 <p>Cargando....</p>
-} @else {
+} @else { -->
 <!-- <h2>Valor del contador: {{ myInterval$ | async }}</h2> -->
-
+<!-- 
 <h3>Profesores: {{ profesores | json }}</h3>
 
 <h3>Cursos:</h3>
 <pre>{{ cursos | json }}</pre>
 
-}
+} -->
 
 
 
