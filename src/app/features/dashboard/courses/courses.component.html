@@ -22,7 +22,7 @@
   
   <ng-container matColumnDef="start">
     <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
-    <td mat-cell *matCellDef="let element"> {{element.start}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.start }} </td>
   </ng-container>
   <ng-container matColumnDef="end">
     <th mat-header-cell *matHeaderCellDef> Fecha de finalizacion </th>
@@ -32,7 +32,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>  </th>
     <td mat-cell *matCellDef="let element"> 
-      <button (click)="deleteCourseById(element.id)" mat-icon-button><mat-icon>delete</mat-icon></button>
+      <button (click)="deleteCourseById(element.id, element.name)" mat-icon-button><mat-icon>delete</mat-icon></button>
       <button (click)="editCourse(element)" mat-icon-button><mat-icon>edit</mat-icon> </button>
       <button [routerLink]="element.id" mat-icon-button><mat-icon>visibility</mat-icon> </button>
     </td>

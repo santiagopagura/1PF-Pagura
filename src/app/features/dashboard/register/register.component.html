@@ -1,0 +1,48 @@
+<div class="container">
+  <h2>Registrar Nuevo Usuario</h2>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" placeholder="Ingrese el nombre">
+      <mat-error *ngIf="userForm.get('nombre')?.invalid && userForm.get('nombre')?.touched">
+        El nombre es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="apellido" placeholder="Ingrese el apellido">
+      <mat-error *ngIf="userForm.get('apellido')?.invalid && userForm.get('apellido')?.touched">
+        El apellido es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Ingrese el email">
+      <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+        Ingrese un email válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Rol</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="admin">Admin</mat-option>
+        <mat-option value="user">User</mat-option>
+        <!-- Agrega más roles si es necesario -->
+      </mat-select>
+      <mat-error *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.touched">
+        Seleccione un rol
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" placeholder="Contraseña generada automáticamente"> 
+      <!-- disabled -->
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Registrar</button>
+  </form>
+</div>

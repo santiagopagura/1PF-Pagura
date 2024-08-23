@@ -1,3 +1,30 @@
+<h2>Crear clase</h2>
+<p>Seleccione el curso al que quiera asignar alumnos. Utilice el DNI del alumno para agregarlo a la clase.</p>
+
+
+
+
+
+<mat-form-field>
+  <input [formControl]="searchControl" matInput />
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+@if (loading) {
+<p>Cargando....</p>
+} @else {
+<!-- <h2>Valor del contador: {{ myInterval$ | async }}</h2> -->
+
+<h3>Profesores: {{ profesores | json }}</h3>
+
+<h3>Cursos:</h3>
+<pre>{{ cursos | json }}</pre>
+
+}
+
+
+
+<!-- 
 <button (click)="openDialog()" mat-flat-button><mat-icon>add</mat-icon>Agregar Alumno</button>
 
 <p>El nombre del alumno agregado es: {{nombreAlumno}} </p>
@@ -31,5 +58,5 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+</table> -->
 

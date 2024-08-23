@@ -3,13 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CourseDialogComponent } from './components/course-dialog/course-dialog.component';
 import { CursosInterface } from '../models';
 import { CoursesService } from '../../../core/services/courses.service';
+import { tap } from 'rxjs';
 
-
-// const Cursos: CursosInterface[] = [
-//   { id: '8s35', name: 'Hydrogen', start: undefined, end:undefined},
-//   { id: '5d18', name: 'Helium', start: undefined, end:undefined},
-//   { id: '4f88', name: 'Lithium', start: undefined, end:undefined},
-// ]
 
 const makeRandomId = (length: number): string => {
   let result = '';
@@ -64,7 +59,7 @@ isLoading= false;
         this.nombreCurso =value.name;
         value.id = makeRandomId(4);
         this.isLoading=true;
-        this.coursesService.addCourse(value).subscribe({
+        this.coursesService.addCourse(value).pipe(tap(()=> this.loadCourses())).subscribe({
           next: (courses) =>{
             this.dataSource = [...courses];      
           },
@@ -76,15 +71,13 @@ isLoading= false;
     });
   }
   
-  deleteCourseById(id:string) {
-    this.coursesService.deleteCourseByID(id).subscribe({
-      next:(course) =>{
-        this.dataSource=[...course];
-      }
-    })
-    this.dataSource = this.dataSource.filter((el)=>el.id != id)
+  deleteCourseById(id:string, elementName:string) {
+    if (confirm(`Está por eliminar el curso ${elementName}?`))
+    this.coursesService.deleteCourseByID(id, elementName).pipe(tap(()=> this.loadCourses())).subscribe()
   }
-
+  // this.coursesService.addCourse(value).pipe(tap(()=> this.loadCourses())).subscribe({
+  //   next: (courses) =>{
+  //     this.dataSource = [...courses];      
   editCourse(courseToEdit: CursosInterface){
     this.matDialog
     .open(CourseDialogComponent, {data:courseToEdit})
@@ -92,13 +85,9 @@ isLoading= false;
     .subscribe({
       next: (value) =>{
         if (!!value) {
-          this.coursesService
-          .editCourseById(courseToEdit.id, value)
-          .subscribe({
-            next:(courses)=>{
-              this.dataSource= [...courses]
-            }
-          });
+          this.coursesService.editCourseById(courseToEdit.id, value).pipe(tap(()=> {
+            this.loadCourses();
+          })).subscribe();
         }
       }
   })

@@ -12,21 +12,22 @@ background-color: azure;
     </mat-card-header>
     <mat-card-content>
       <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-        <mat-form-field class="w-full mb-3" appearance="outline">
+        
+        <mat-form-field appearance="outline">
           <mat-label>Email:</mat-label>
           <input formControlName="email" matInput>
           <mat-hint>Debe ingresar un correo electronico valido.</mat-hint>
           <mat-icon matSuffix>email</mat-icon>
         </mat-form-field>
 
-        <mat-form-field class="w-full">
+        <mat-form-field >
           <mat-label>Contraseña</mat-label>
           <input formControlName="password" matInput>
           <mat-icon matSuffix> key</mat-icon>
           <mat-hint>Debe ingresar su contraseña.</mat-hint>
         </mat-form-field>
 
-        <mat-form-field class="w-full">
+        <mat-form-field >
           <mat-label>Rol</mat-label>
           <mat-select formControlName="role">
             <mat-option value="admin">Admin</mat-option>

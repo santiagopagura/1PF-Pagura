@@ -8,14 +8,11 @@ import { DashboardComponent } from './dashboard.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
-import { CoursesModule } from './courses/courses.module';
-import { StudentsModule } from './students/students.module';
-import { HomeModule } from './home/home.module';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
   ],
   exports: [DashboardComponent],
   imports: [

@@ -9,6 +9,8 @@ import { AuthRoutingModule } from './features/auth/auth-routing.module';
 import { AuthModule } from './features/auth/auth.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -18,12 +20,13 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthRoutingModule
+    AuthRoutingModule,
   ],
   providers: [
     provideAnimationsAsync(),
     provideNativeDateAdapter(),
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
+    provideHttpClient(withFetch()),
   ],
   bootstrap: [AppComponent]
 })

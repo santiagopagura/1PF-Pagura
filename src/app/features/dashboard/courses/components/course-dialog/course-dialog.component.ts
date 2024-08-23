@@ -29,7 +29,7 @@ constructor(
 
 }
   onSubmit():void{
-    console.log(this.courseForm.value);
+    console.log("recibo desde el course-dialog " , this.courseForm.value);
     this.matDialogRef.close(this.courseForm.value);
   }
 }
