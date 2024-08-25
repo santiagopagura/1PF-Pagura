@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Estudiante } from '../../../models';
 
-
 @Component({
   selector: 'app-students-dialog',
   templateUrl: './students-dialog.component.html',

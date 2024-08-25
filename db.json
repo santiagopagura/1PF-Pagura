@@ -1,7 +1,7 @@
 {
   "courses": [
     {
-      "name": "JSON Server",
+      "name": "JSON Server inicial",
       "start": "2024-08-11T22:00:00.000Z",
       "end": "2024-08-27T22:00:00.000Z",
       "id": "8s35"
@@ -43,7 +43,7 @@
       "id": "534234235"
     },
     {
-      "name": "JSON",
+      "name": "Laura",
       "surname": "cacho",
       "id": "56485458"
     },
@@ -53,11 +53,22 @@
       "surname": "Paez"
     },
     {
-      "id": "1234567",
       "name": "lucas",
-      "surname": "prodan"
+      "surname": "prodann",
+      "id": "1234567"
     }
   ],
   "users": [],
-  "professors": []
+  "professors": [
+    {
+      "id": "20885632",
+      "name": "Roberto",
+      "surname": "Caldani"
+    },
+    {
+      "id": "26523478",
+      "name": "laura",
+      "surname": "Fidalgo"
+    }
+  ]
 }

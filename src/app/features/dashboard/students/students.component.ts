@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentsDialogComponent } from './components/students-dialog/students-dialog.component';
-import { Estudiante, StudentsInterface } from '../models';
+import { StudentsInterface } from '../models';
 import { StudentsService } from '../../../core/services/students.service';
 import { tap } from 'rxjs';
 
@@ -51,7 +51,10 @@ ngOnInit(): void {
         // this.dataSource.push(value);
         this.studentService.addStudent(value).pipe(tap(()=>this.loadStudents())).subscribe({
           next: (student) =>{
-            this.dataSource = [...student];      
+            console.log('Tipo de dato de student:', typeof student);
+            console.log('Valor de student:', student);
+            console.log('Es student un array?', Array.isArray(student));
+            this.dataSource = [student];      
           },
           complete: () => {
             // this.isLoading =false;

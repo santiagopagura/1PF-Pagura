@@ -12,6 +12,12 @@ export interface StudentsInterface {
   id: string;
 }
 
+export interface ProfessorsInterface {
+  name: string;
+  surname: string;
+  id: string;
+}
+
 export interface CursosInterface {
   id: string;
   name: string;

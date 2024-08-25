@@ -9,8 +9,8 @@ import { environment } from '../../../environments/environment';
 })
 export class StudentsService {
 
-  addStudent(student: StudentsInterface): Observable<StudentsInterface[]> {
-    return this.httpClient.post<StudentsInterface[]>((environment.apiUrl + 'students'), student)
+  addStudent(student: StudentsInterface): Observable<StudentsInterface> {
+    return this.httpClient.post<StudentsInterface>((environment.apiUrl + 'students'), student)
   }
 
   getStudents():Observable<StudentsInterface[]> {
