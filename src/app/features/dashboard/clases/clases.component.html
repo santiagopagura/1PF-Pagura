@@ -21,7 +21,7 @@
 
     <ul *ngIf="students$ | async as students" class="search-results">
       <li *ngFor="let student of students" (click)="addStudent(student)">
-        {{ student.name }} (ID: {{ student.id }})
+        {{ student.name }} {{ student.surname }} (ID: {{ student.id }})
       </li>
     </ul>
 
@@ -37,105 +37,32 @@
       Vincular Estudiantes al Curso
     </button>
   </form>
-</div>
 
 
-
-
-
-
-<!-- <div class="container">
   <h2>Vincular Curso con Estudiantes</h2>
-  <form [formGroup]="linkForm" (ngSubmit)="linkStudentsToCourse()">
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Seleccionar Curso</mat-label>
-      <mat-select formControlName="course">
-        <mat-option *ngFor="let course of courses" [value]="course.id">
-          {{ course.name }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="linkForm.get('course')?.invalid && linkForm.get('course')?.touched">
-        Seleccione un curso
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Buscar Estudiante por ID</mat-label>
-      <input matInput formControlName="studentSearch" placeholder="Ingrese ID del estudiante">
-    </mat-form-field>
-
-    <mat-list *ngIf="students$ | async as students">
-      <mat-list-item *ngFor="let student of students" (click)="addStudent(student)">
-        {{ student.name }} (ID: {{ student.id }})
-      </mat-list-item>
-    </mat-list>
-
-    <h3>Estudiantes seleccionados:</h3>
-    <mat-chip-list>
-      <mat-chip *ngFor="let student of selectedStudents">
-        {{ student.name }}
-      </mat-chip>
-    </mat-chip-list>
-
-    <button mat-raised-button color="primary" type="submit" [disabled]="selectedStudents.length === 0">
-      Vincular Estudiantes al Curso
-    </button>
+  <form [formGroup]="linkForm">
+    <div class="form-group">
+      <label for="course">Seleccionar Curso</label>
+      <select formControlName="course" class="form-control">
+        <option value="" disabled>Seleccione un curso</option>
+        <option *ngFor="let course of courses" [value]="course.id">
+          {{ course.name }} {{course.id | json}}
+        </option>
+      </select>
+    </div>
   </form>
-</div> -->
 
-<!-- 
-<mat-form-field>
-  <input [formControl]="searchControl" matInput />
-  <mat-icon matSuffix>search</mat-icon>
-</mat-form-field>
+  <div *ngIf="students.length > 0">
+    <h3>Estudiantes inscritos en el curso:</h3>
+    <ul>
+      <li *ngFor="let student of students">
+        {{ student.name }} {{ student.surname }} (ID: {{ student.id }})
+      </li>
+    </ul>
+  </div>
 
-@if (loading) {
-<p>Cargando....</p>
-} @else { -->
-<!-- <h2>Valor del contador: {{ myInterval$ | async }}</h2> -->
-<!-- 
-<h3>Profesores: {{ profesores | json }}</h3>
-
-<h3>Cursos:</h3>
-<pre>{{ cursos | json }}</pre>
-
-} -->
-
-
-
-<!-- 
-<button (click)="openDialog()" mat-flat-button><mat-icon>add</mat-icon>Agregar Alumno</button>
-
-<p>El nombre del alumno agregado es: {{nombreAlumno}} </p>
-
-
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="surname">
-    <th mat-header-cell *matHeaderCellDef> Apellido </th>
-    <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> DNI </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let element"> 
-      <button (click)="deleteStudent(element.id, element.name)" mat-icon-button><mat-icon>delete</mat-icon></button>
-      <button (click)="editStudent(element)" mat-icon-button><mat-icon>edit</mat-icon> </button>
-    </td>
-  </ng-container>
-
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> -->
+  <div *ngIf="students.length === 0 && selectedCourseId">
+    <p>No hay estudiantes inscritos en este curso.</p>
+  </div>
+</div>
 

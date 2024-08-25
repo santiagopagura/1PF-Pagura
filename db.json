@@ -21,19 +21,34 @@
   ],
   "classes": [
     {
-      "id": "ef6e",
-      "studentId": "534234235",
+      "id": "3c17",
+      "studentId": "56485458",
+      "courseId": "98Ai"
+    },
+    {
+      "id": "4716",
+      "studentId": "1234567",
+      "courseId": "98Ai"
+    },
+    {
+      "id": "cce8",
+      "studentId": "56485458",
+      "courseId": "98Ai"
+    },
+    {
+      "id": "4da6",
+      "studentId": "1234567",
+      "courseId": "98Ai"
+    },
+    {
+      "id": "2a99",
+      "studentId": "1234567",
       "courseId": "8s35"
     },
     {
-      "id": "72ba",
-      "studentId": "534234235",
-      "courseId": "98Ai"
-    },
-    {
-      "id": "d7f7",
+      "id": "de4e",
       "studentId": "562359745",
-      "courseId": "98Ai"
+      "courseId": "8s35"
     }
   ],
   "students": [

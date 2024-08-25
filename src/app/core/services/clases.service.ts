@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { CursosInterface, StudentsInterface } from '../../features/dashboard/models';
+import { clasesInterface, CursosInterface, StudentsInterface } from '../../features/dashboard/models';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +15,8 @@ export class ClasesService {
   searchStudents(query: string): Observable<StudentsInterface[]> {
     return this.httpClient.get<StudentsInterface[]>(environment.apiUrl + "students?id_like="+ query);
   }
-  // /students?name_like=${query}
-  // http://localhost:3000/students?search=
-  // environment.apiUrl + "students?search="+ query
 
-  linkStudentToCourse(courseId: string, studentId: string): Observable<any> {
+  linkStudentToCourse(courseId: any, studentId: string): Observable<any> {
     return this.httpClient.post(environment.apiUrl +`classes/`, { studentId, courseId });
   }
 
@@ -27,4 +24,12 @@ export class ClasesService {
     return this.httpClient.get<CursosInterface[]>(environment.apiUrl + 'courses');
   }
  
+
+  getStudentsByCourse(courseId: string): Observable<any> {
+    return this.httpClient.get<clasesInterface>(`${environment.apiUrl}classes?courseId=${courseId}`);
+  }
+  getStudentsData(internalIDStudent: string): Observable<StudentsInterface[]> {
+    return this.httpClient.get<any>(`${environment.apiUrl}students?id=${internalIDStudent}`);
+  }
+
 }

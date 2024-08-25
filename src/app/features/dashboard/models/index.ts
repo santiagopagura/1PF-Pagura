@@ -6,7 +6,6 @@ export interface Estudiante {
 }
 
 export interface StudentsInterface {
-  position: number,
   name: string;
   surname: string;
   id: string;
@@ -16,6 +15,11 @@ export interface ProfessorsInterface {
   name: string;
   surname: string;
   id: string;
+}
+export interface clasesInterface {
+  id: string;
+  studentId: string;
+  courseId: string;
 }
 
 export interface CursosInterface {

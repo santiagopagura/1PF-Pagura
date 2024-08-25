@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CoursesService } from '../../../core/services/courses.service';
 import { concatMap, debounceTime, delay, distinctUntilChanged, forkJoin, interval, map, Observable, of, retry, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
-import { CursosInterface, StudentsInterface } from '../models';
+import { clasesInterface, CursosInterface, StudentsInterface } from '../models';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClasesService } from '../../../core/services/clases.service';
 import { query } from '@angular/animations';
@@ -17,6 +17,10 @@ export class ClasesComponent implements OnInit {
   courses: CursosInterface[] = [];
   students$: Observable<StudentsInterface[]> = new Observable();
   selectedStudents: StudentsInterface[] = [];
+  selectedCourseId: string | null = null;
+  students: StudentsInterface[]=[];
+  classes: clasesInterface[] = [];
+
 
   constructor(
     private fb: FormBuilder,
@@ -33,14 +37,19 @@ export class ClasesComponent implements OnInit {
 
 
     this.students$ = this.linkForm.get('studentSearch')!.valueChanges.pipe(
-      debounceTime(500),  // Espera 300ms para evitar múltiples solicitudes innecesarias
-      distinctUntilChanged(),  // Solo ejecuta la búsqueda si el término cambió
-      // switchMap(query => this.courseStudentService.searchStudents(query)),  // Realiza la búsqueda en el backend
+      debounceTime(500),  
+      distinctUntilChanged(),  
       switchMap(query => {
-        console.log('Valor de query:', query);  // Aquí agregas el console.log para ver el valor de query
+        console.log('Valor de query:', query); 
         return this.courseStudentService.searchStudents(query);
       })
     );
+
+    this.linkForm.get('course')!.valueChanges.subscribe(courseId => {
+      this.selectedCourseId = courseId;
+      this.loadStudentsByCourse(courseId);
+    });
+
   }
 
   loadCourses() {
@@ -48,6 +57,47 @@ export class ClasesComponent implements OnInit {
       this.courses = data;
     });
   }
+
+
+  // loadStudentsByCourse(courseId: string) {
+  //   if (courseId) {
+  //     console.log("aca veo el students en courseId", courseId)
+  //     this.courseStudentService.getStudentsByCourse(courseId).subscribe(data => {
+  //       this.students = data;
+
+  //       console.log("aca veo el students en loadstudentsbycourse", this.students);
+  //       this.courseStudentService.getStudentsData(this.students.name).subscribe();
+        
+  //       // this.courseStudentService.getStudentsData(this.students);
+  //     });
+  //   }
+  // }
+  
+loadStudentsByCourse(courseId: string) {
+  if (courseId) {
+    console.log("aca veo el students en courseId", courseId)
+    this.courseStudentService.getStudentsByCourse(courseId).subscribe(data => {
+      this.classes = data;
+      
+      console.log("aca veo el students en loadstudentsbycourse  CLASSES", this.classes);
+      
+      const studentDataObservables = this.classes.map(classes => 
+        this.courseStudentService.getStudentsData(classes.studentId)
+      );
+    
+
+      forkJoin(studentDataObservables).subscribe(studentsDataArray => {
+        const studentsData = studentsDataArray.flat();  
+        console.log("Datos de estudiantes obtenidos:", studentsData);
+        this.students = studentsData; 
+      });
+
+
+
+    });
+  }
+}
+
 
   addStudent(student: any) {
     if (!this.selectedStudents.some(s => s.id === student.id)) {
@@ -89,156 +139,3 @@ export class ClasesComponent implements OnInit {
 }
   
   
-  
-  
-  
-  
-//   // myRandomNumber$ = new Observable<number>((subscriber) => {
-//   //   let counter = 0;
-//   //   setInterval(() => {
-//   //     counter++;
-//   //     subscriber.next(counter);
-//   //   }, 1000);
-//   // });
-
-//   myInterval$ = interval(1500);
-
-//   obtenerNombreUsuario$ = of('Mariano').pipe(delay(1000));
-
-//   obtenerNombreUsuario2$ = new Observable((subscriber) => {
-//     setTimeout(() => {
-//       subscriber.next('Mariano');
-//     }, 1000);
-//   });
-
-//   myRandomNumberSubscription?: Subscription;
-
-//   // valorContador = 0;
-
-//   loading = false;
-//   cursos$: Observable<CursosInterface[]>;
-
-//   profesores$: Observable<string[]> = of(['Martin', 'Mariana', 'Jhoana']).pipe(
-//     delay(3000)
-//   );
-
-//   profesores: string[] = [];
-//   cursos: CursosInterface[] = [];
-
-//   searchControl: FormControl;
-
-//   subscriptionToSearchControlValueChanges?: Subscription;
-//   subscriptions: Subscription[] = [];
-//   isDestroyed$ = new Subject<void>();
-
-//   constructor(private coursesService: CoursesService, private fb: FormBuilder) {
-//     this.searchControl = this.fb.control('');
-
-//     this.cursos$ = coursesService.getCourses();
-//     this.loading = true;
-
-//     // this.myRandomNumberSubscription = this.myInterval$
-//     //   .pipe(
-//     //     // take(20),
-//     //     // filter((valor) => valor > 5)
-//     //     // skip(1),
-//     //     // first()
-//     //     // take(1)
-//     //     tap((valor) => console.log('Valor antes del map: ', valor)),
-//     //     map((valor) => valor * 2),
-//     //     tap((valor) => console.log('Valor despues del map: ', valor))
-//     //   )
-//     //   .subscribe({
-//     //     // Es cuando recibimos un valor (sin error)
-//     //     next: (randomNumber) => {
-//     //       console.log(randomNumber);
-//     //       this.valorContador = randomNumber;
-//     //     },
-//     //     // Cuando emite un error
-//     //     error: () => {},
-//     //     // Cuando el observable va a dejar de emitir valores (se completa)
-//     //     complete: () => {},
-//     //   });
-//   }
-
-//   ngOnInit(): void {
-//     this.obtenerNombreUsuario$.subscribe({
-//       next: (v) => console.log(v),
-//     });
-//     forkJoin([this.cursos$, this.profesores$]).subscribe({
-//       next: (resultados) => {
-//         this.profesores = resultados[1];
-//         this.cursos = resultados[0];
-//       },
-//       complete: () => {
-//         this.loading = false;
-//       },
-//     });
-//     this.loadProfesoresAndCursosConcat();
-//     // this.probandoRetry();
-//     this.subscribeToSearchControlValueChanges();
-//   }
-
-//   // probandoRetry(): void {
-//   //   new Observable((subs) => {
-//   //     subs.next(1);
-//   //     subs.next(2);
-//   //     subs.next(3);
-//   //     subs.error('Hello, soy un error');
-//   //   })
-//   //     .pipe(retry(3))
-//   //     .subscribe({
-//   //       next: (v) => {
-//   //         console.log(v);
-//   //       },
-//   //       error: (err) => {
-//   //         console.error(err);
-//   //       },
-//   //     });
-//   // }
-
-//   subscribeToSearchControlValueChanges(): void {
-//     this.subscriptions.push(
-//       this.searchControl.valueChanges
-//         .pipe(
-//           debounceTime(500),
-//           concatMap((value) => this.coursesService.searchCoursesByName(value)),
-//           takeUntil(this.isDestroyed$)
-//         )
-//         .subscribe({
-//           next: (results) => {
-//             console.log(results);
-//           },
-//         })
-//     );
-//   }
-
-//   loadProfesoresAndCursosConcat(): void {
-//     this.profesores$
-//       .pipe(
-//         concatMap((profesores) => {
-//           return this.cursos$.pipe(map((cursos) => ({ cursos, profesores })));
-//         })
-//       )
-//       .subscribe({
-//         next: (cursosYProfesores) => { 
-//           console.log('loadProfesoresAndCursosConcat', cursosYProfesores);
-//         },
-//       });
-//   }
-//   // this.cursos$.subscribe({
-//   //   next: (cursos) => {
-//   //     console.log('loadProfesoresAndCursosConcat', cursos);
-//   //   },
-//   // });
-
-//   ngOnDestroy(): void {
-//     this.subscriptions.forEach((s) => s.unsubscribe());
-
-//     this.isDestroyed$.next();
-
-//     // ngOnDestroy es un ciclo de vida de angular que se ejecuta cada vez que el componente
-//     // es destruido (sale de la pantalla)
-//     // this.myRandomNumberSubscription?.unsubscribe();
-//   }
-// }
