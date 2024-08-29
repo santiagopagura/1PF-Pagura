@@ -39,6 +39,9 @@
   </form>
 
 
+  <br><br><br><br><br><br><br><br><br><br><br>
+
+
   <h2>Vincular Curso con Estudiantes</h2>
   <form [formGroup]="linkForm">
     <div class="form-group">
@@ -50,19 +53,22 @@
         </option>
       </select>
     </div>
-  </form>
 
   <div *ngIf="students.length > 0">
     <h3>Estudiantes inscritos en el curso:</h3>
     <ul>
       <li *ngFor="let student of students">
-        {{ student.name }} {{ student.surname }} (ID: {{ student.id }})
+        {{ student.name }} {{ student.surname }} (ID: {{ student.id }}) 
+        <button (click)="removeStudentfromClasse(student, selectedCourseId)">Eliminar</button>
       </li>
     </ul>
   </div>
 
+
+
   <div *ngIf="students.length === 0 && selectedCourseId">
     <p>No hay estudiantes inscritos en este curso.</p>
   </div>
+</form>
 </div>
 

@@ -19,38 +19,7 @@
       "end": "2024-08-30T22:00:00.000Z"
     }
   ],
-  "classes": [
-    {
-      "id": "3c17",
-      "studentId": "56485458",
-      "courseId": "98Ai"
-    },
-    {
-      "id": "4716",
-      "studentId": "1234567",
-      "courseId": "98Ai"
-    },
-    {
-      "id": "cce8",
-      "studentId": "56485458",
-      "courseId": "98Ai"
-    },
-    {
-      "id": "4da6",
-      "studentId": "1234567",
-      "courseId": "98Ai"
-    },
-    {
-      "id": "2a99",
-      "studentId": "1234567",
-      "courseId": "8s35"
-    },
-    {
-      "id": "de4e",
-      "studentId": "562359745",
-      "courseId": "8s35"
-    }
-  ],
+  "classes": [],
   "students": [
     {
       "name": "juan",
@@ -63,9 +32,9 @@
       "id": "56485458"
     },
     {
-      "id": "562359745",
       "name": "Ana",
-      "surname": "Paez"
+      "surname": "Paez",
+      "id": "562359745"
     },
     {
       "name": "lucas",
