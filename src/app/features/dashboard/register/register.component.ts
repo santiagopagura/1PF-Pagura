@@ -33,17 +33,21 @@ export class RegisterComponent {
       const formData = {
         ...this.userForm.getRawValue()  // Obtén valores incluso de los campos deshabilitados
       };
-      this.registerService.registerUser(formData).subscribe(
-        response => {
-          alert('Usuario registrado con éxito');
+      this.registerService.registerUser(formData).subscribe({
+        next: () =>{
           this.userForm.reset();
+          console.log("usuario creado");
         },
-        error => {
+        error: () =>{
           alert('Ocurrió un error al registrar el usuario');
+        },
+        complete: () =>{
+          alert('Usuario registrado con éxito');
         }
-      );
-    } else {
-      alert('Por favor completa todos los campos correctamente');
+        })
     }
   }
+
+
+  
 }
