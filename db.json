@@ -19,7 +19,23 @@
       "end": "2024-08-30T22:00:00.000Z"
     }
   ],
-  "classes": [],
+  "classes": [
+    {
+      "id": "317c",
+      "studentId": "56485458",
+      "courseId": "8s35"
+    },
+    {
+      "id": "a465",
+      "studentId": "562359745",
+      "courseId": "8s35"
+    },
+    {
+      "id": "518b",
+      "studentId": "534234235",
+      "courseId": "8s35"
+    }
+  ],
   "students": [
     {
       "name": "juan",
@@ -43,7 +59,24 @@
     }
   ],
   "users": [
-   
+    {
+      "id": "687e",
+      "nombre": "santiago",
+      "apellido": "pagura",
+      "email": "sasa@gmail.com",
+      "role": "admin",
+      "password": "czbz9728",
+      "token": "asdwq5464ww"
+    },
+    {
+      "id": "6347e",
+      "nombre": "santiago",
+      "apellido": "pagura",
+      "email": "123@gmail.com",
+      "role": "user",
+      "password": "1234",
+      "token": "asdweqw64ww"
+    }
   ],
   "professors": [
     {

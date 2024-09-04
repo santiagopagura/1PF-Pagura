@@ -8,7 +8,7 @@
       <a mat-list-item routerLink="students" routerLinkActive  #alumnosLink="routerLinkActive" [activated]="alumnosLink.isActive"
       >Alumnos</a>
 
-      <a mat-list-item routerLink="professors" routerLink="professors" routerLinkActive #professorsLink="routerLinkActive" [activated]="professorsLink.isActive" 
+      <a mat-list-item  *ngIf="canEditClasses()" routerLink="professors" routerLink="professors" routerLinkActive #professorsLink="routerLinkActive" [activated]="professorsLink.isActive" 
       >Profesores</a>
 
       <a mat-list-item routerLink="/dashboard/courses" routerLink="courses" routerLinkActive #cursosLink="routerLinkActive" [activated]="cursosLink.isActive"
@@ -17,7 +17,7 @@
       <a mat-list-item routerLink="clases" routerLink="clases" routerLinkActive #clasesLink="routerLinkActive" [activated]="clasesLink.isActive" 
       >Clases</a>
       
-      <a mat-list-item routerLink="register" routerLink="register" routerLinkActive #registerLink="routerLinkActive" [activated]="registerLink.isActive" 
+      <a mat-list-item  *ngIf="canEditClasses()" routerLink="register" routerLink="register" routerLinkActive #registerLink="routerLinkActive" [activated]="registerLink.isActive" 
       >Registrar</a>
 
       <a mat-list-item (click)="logout()" routerLinkActive="link-activo" 

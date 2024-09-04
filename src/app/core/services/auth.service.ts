@@ -1,56 +1,89 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { User } from '../../features/dashboard/models';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private FAKE_USER : User = {
-    email: 'faque@gmail.com',
-    password: '1234',
-    role: 'admin',
-  }
-  private VALID_TOKEN = 'sfdjaoe';
-
   private _authUser$ = new BehaviorSubject<User | null >(null);
   authUser$ =this._authUser$.asObservable() 
+  private currentUserRole: string | null = null;
 
 
-  constructor(private router: Router) { }
+  constructor(private http:HttpClient, private router: Router) { }
 
-  login() {
-    // localStorage.setItem('token',this.VALID_TOKEN);
-
-    this._authUser$.next(this.FAKE_USER);
-    localStorage.setItem('token', this.VALID_TOKEN);
-    this.router.navigate(['dashboard', 'courses']);
+  login(data:{email:string, password: string}) {
+    this.http.get<User[]>(environment.apiUrl + 'users',{
+      params:{
+        email: data.email,
+        password: data.password,
+      }
+    }).subscribe({
+      next: (response) => {
+        if (!response.length) {
+          alert('Usuario o contraseña incorrecto');
+        } else {
+          const authUser = response[0];
+          localStorage.setItem('token', authUser.token);
+          localStorage.setItem('role', authUser.role);
+          this.currentUserRole = authUser.role;
+          this._authUser$.next(authUser);
+          this.router.navigate(['dashboard', 'home']);
+        }
+      },
+      error: (err) => {
+        alert('Error al iniciar sesion')
+      }
+    });
   }
 
   logout(){
-    localStorage.removeItem('token');
-    this._authUser$.next(null);
+    localStorage.clear();
+    // localStorage.removeItem('token');
+    // this._authUser$.next(null);
     this.router.navigate(['auth','login']);
-  }
-
-  vrifyUser(): Observable<User | null> {
-    const token =localStorage.getItem('token');
-    if (token) {
-      this._authUser$.next(this.FAKE_USER);
-    }
-    return this.authUser$;
   }
 
   verifyToken(): Observable<boolean> {
     const token =localStorage.getItem('token');
-    const isValid = this.VALID_TOKEN === token;
-    if (isValid) {
-      this._authUser$.next(this.FAKE_USER);
+    if (!token) {
+      return of(false)
     }
-    return of(isValid);
+    return this.http.get<User[]>(environment.apiUrl + 'users', {
+      params: {
+        token: token,
+      },
+    }).pipe(
+      map((response)=>{
+        if (!response.length) {
+          return false;
+        } else{
+          const authUser = response[0];
+          localStorage.setItem('token', authUser.token);
+          this._authUser$.next(authUser);
+          //BORRAR luego
+          console.log("este es el authUser", authUser)
+          console.log("este es el _authUser$", this._authUser$)
+        
+          return true;
+        }
+      })
+    )
   }
+
+  getUserRole(): string | null {
+    return localStorage.getItem('role');
+  }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
 }
 
  

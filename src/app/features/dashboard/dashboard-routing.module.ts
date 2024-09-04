@@ -26,8 +26,8 @@ const routes: Routes = [
   },
   {
     path: 'clases',
-    component: ClasesComponent,
-    canActivate: [adminGuard],
+    // component: ClasesComponent,
+    // canActivate: [adminGuard],
     loadChildren:()=>import('./clases/clases.module').then((m)=>m.ClasesModule),
   },
   { path: 'register', 

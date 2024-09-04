@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProfessorsService } from '../../../core/services/professors.service';
 import { ProfessorsDialogComponent } from './components/professors-dialog/professors-dialog.component';
 import { tap } from 'rxjs';
+import { AuthService } from '../../../core/services/auth.service';
 
 
 // const Professors: ProfessorsInterface[] = [];
@@ -24,12 +25,20 @@ export class ProfessorsComponent implements OnInit {
   dataSource!: ProfessorsInterface[];
 
   nombreAlumno ="";
-
-constructor(private matDialog: MatDialog, private professorsService: ProfessorsService){}
+  currentUserRole: string | null = null;
+  
+constructor(private matDialog: MatDialog, private professorsService: ProfessorsService, private authService: AuthService){}
 
 ngOnInit(): void {
     this.loadProfessors();
+    this.currentUserRole = this.authService.getUserRole();
   }
+
+  
+    // Ejemplo de función que bloquea acciones para usuarios 'user'
+    canEditClasses(): boolean {
+      return this.currentUserRole === 'admin';
+    }
 
     loadProfessors(){
     // this.isLoading = true;

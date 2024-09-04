@@ -33,7 +33,11 @@ export interface CursosInterface {
 export type UserRole = 'admin'| 'user';
 
 export interface User {
+  id: string;
+  nombre: string;
+  apellido: string;
   email: string;
-  password: string;
   role: UserRole;
+  password: string;
+  token: string;
 }

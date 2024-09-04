@@ -4,6 +4,7 @@ import { StudentsDialogComponent } from './components/students-dialog/students-d
 import { StudentsInterface } from '../models';
 import { StudentsService } from '../../../core/services/students.service';
 import { tap } from 'rxjs';
+import { AuthService } from '../../../core/services/auth.service';
 
 
 const Estudiantado: StudentsInterface[] = [];
@@ -22,12 +23,19 @@ export class StudentsComponent implements OnInit {
   dataSource = Estudiantado;
 
   nombreAlumno ="";
-
-constructor(private matDialog: MatDialog, private studentService: StudentsService){}
+  currentUserRole: string | null = null;
+constructor(private matDialog: MatDialog, private studentService: StudentsService, private authService: AuthService){}
 
 ngOnInit(): void {
     this.loadStudents();
+    this.currentUserRole = this.authService.getUserRole();
   }
+  
+    // Ejemplo de función que bloquea acciones para usuarios 'user'
+    canEditClasses(): boolean {
+      return this.currentUserRole === 'admin';
+    }
+
 
     loadStudents(){
     // this.isLoading = true;
