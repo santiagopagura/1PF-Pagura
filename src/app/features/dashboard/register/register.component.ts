@@ -24,14 +24,14 @@ export class RegisterComponent {
   }
 
   generatePassword(): string {
-    // Generación automática de contraseña (puedes personalizar esta lógica)
+  
     return Math.random().toString(36).slice(-8);
   }
 
   onSubmit() {
     if (this.userForm.valid) {
       const formData = {
-        ...this.userForm.getRawValue()  // Obtén valores incluso de los campos deshabilitados
+        ...this.userForm.getRawValue()  
       };
       this.registerService.registerUser(formData).subscribe({
         next: () =>{

@@ -33,14 +33,9 @@ export class DashboardComponent implements OnInit {
       });
       this.nombreUsuario$ = this.storeApp.select(selectUserName);
     }
-  
-    // Ejemplo de función que bloquea acciones para usuarios 'user'
+
     canEditClasses(): boolean {
       return this.currentUserRole === 'admin';
     }
 
-    // obtenerNombre(){
-    //   console.log('obtenerNombre', (this.nombreUsuario = localStorage.getItem('nombre')) )
-    //   return this.nombreUsuario = localStorage.getItem('nombre');
-    // }
 }

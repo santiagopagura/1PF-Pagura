@@ -44,33 +44,3 @@ export class CoursesService {
   constructor(private httpClient: HttpClient) { }
   
 }
-
-
-
-
-  // editCourseById(id: string, update: CursosInterface) {
-  //     this.MY_DATABASE =this.MY_DATABASE.map((el)=>
-  //     el.id ===id ? {...update, id}: el);
-  //     return this.getCourses();
-  //   }
-
-
-  // getCourses():Observable<CursosInterface[]> {
-  //   return new Observable ((observer)=>{
-  //     setTimeout(()=>{
-  //       observer.next(this.MY_DATABASE);
-  //       observer.complete();
-  //     }, 500);
-  //     console.log('lalalal') 
-  //   });
-  // }
-
-  // addCourse(course: CursosInterface): Observable<CursosInterface[]> {
-  //   this.MY_DATABASE.push(course);
-  //   return  this.getCourses();
-  // }
-
-  // deleteCourseByID(id:string): Observable<CursosInterface[]> {
-  //   this.MY_DATABASE= this.MY_DATABASE.filter((el)=>el.id !=id);
-  //   return  this.getCourses();
-  // }

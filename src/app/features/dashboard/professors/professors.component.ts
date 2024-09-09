@@ -39,8 +39,6 @@ ngOnInit(): void {
     // this.currentUserRole = this.authService.getUserRole();
   }
 
-  
-    // Ejemplo de función que bloquea acciones para usuarios 'user'
     canEditClasses(): boolean {
       return this.currentUserRole === 'admin';
     }
@@ -93,7 +91,4 @@ ngOnInit(): void {
         }
       })
     }
-
-
-
 }

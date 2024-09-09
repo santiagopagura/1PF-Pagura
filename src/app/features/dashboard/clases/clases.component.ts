@@ -126,7 +126,7 @@ loadStudentsByCourse(courseId: string) {
     
       console.log("consol de selectedStudents", this.selectedStudents)
 
-      this.selectedStudents = this.selectedStudents.filter(s => s.id !== student.id); // Actualiza la lista de estudiantes en la vista
+      this.selectedStudents = this.selectedStudents.filter(s => s.id !== student.id); 
       console.log(`Estudiante ${student.name} eliminado exitosamente.`);
   }
   removeStudentfromClasse(student: StudentsInterface, courseId: string): void {
@@ -143,23 +143,6 @@ loadStudentsByCourse(courseId: string) {
       });
     }
   }
-  
-
-  // removeStudent(student: StudentsInterface): void {
-  //   if (confirm(`¿Estás seguro de que quieres eliminar a ${student.name} ${student.surname} del curso?`)) {
-  //     console.log("consol de selectedStudents", this.selectedStudents)
-  //     this.courseStudentService.deleteStudentFromCourse(student.id).subscribe({
-  //       next: () => {
-  //         this.students = this.students.filter(s => s.id !== student.id); // Actualiza la lista de estudiantes en la vista
-  //         console.log(`Estudiante ${student.name} eliminado exitosamente.`);
-  //       },
-  //       error: (err) => {
-  //         console.error(`Error al eliminar al estudiante: ${err}`);
-  //       }
-  //     });
-  //   }
-  // }
-
 
 }
   
