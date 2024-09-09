@@ -17,10 +17,17 @@ export class DashboardComponent implements OnInit {
   currentUserRole: string | null = null;
 
   showFiller = false;
-  nombreUsuario$!: Observable<string | null | undefined>;
+  
+  nombreUsuario: string = '';
 
-
-  constructor(private authService: AuthService, private store :Store, private storeApp: Store<AppState>){}
+  constructor(private authService: AuthService, private store :Store, private storeApp: Store<AppState>){
+    
+    const nombre = localStorage.getItem('name');
+    if (nombre) {
+      this.nombreUsuario = nombre;
+    }
+    console.log("nombre de usuarururururur" + this.nombreUsuario )
+  }
     
   logout(){
       this.authService.logout();
@@ -31,7 +38,7 @@ export class DashboardComponent implements OnInit {
       this.store.select(selectAuthRole).subscribe(role => {
         this.currentUserRole = role;
       });
-      this.nombreUsuario$ = this.storeApp.select(selectUserName);
+     
     }
 
     canEditClasses(): boolean {

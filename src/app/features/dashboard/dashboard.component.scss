@@ -28,3 +28,9 @@
 .link-activo {
   background-color: lightgrey;
 }
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
