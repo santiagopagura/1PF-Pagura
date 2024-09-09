@@ -5,7 +5,7 @@ import { HomeComponent } from './home/home.component';
 // import { CourseDetailComponent } from './courses/pages/course-detail/course-detail.component';
 // import { StudentsComponent } from './students/students.component';
 import { ClasesComponent } from './clases/clases.component';
-import { adminGuard } from '../../core/guards/admin.guard';
+// import { adminGuard } from '../../core/guards/admin.guard';
 
 const routes: Routes = [
   {

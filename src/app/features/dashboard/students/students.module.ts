@@ -14,6 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatTableModule} from '@angular/material/table';
 
+import { studentsReducer } from '../../../core/students/students.reducer';
+import { StudentsEffects } from '../../../core/students/students.effects';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,10 @@ import {MatTableModule} from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    
+    // StoreModule.forFeature('students', studentsReducer),
+    // EffectsModule.forFeature([StudentsEffects])
   ]
 })
 export class StudentsModule { }

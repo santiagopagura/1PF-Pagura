@@ -50,6 +50,9 @@ export class ClasesService {
       })
     );
   }
+  getClasses(): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${environment.apiUrl}classes`);
+  }
   
 
 }

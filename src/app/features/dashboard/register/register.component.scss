@@ -4,7 +4,7 @@
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
 }
 
@@ -13,12 +13,32 @@ h2 {
   margin-bottom: 20px;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
 .mat-form-field {
-  width: 100%;
+  width: 100%;  // Asegura que el input ocupe todo el ancho disponible
+  margin-bottom: 20px;  // Agrega separación entre los campos
+}
+
+.mat-form-field .mat-input-element {
+  padding: 10px;  // Mejora la apariencia interna del input
 }
 
 button {
-  width: 100%;
-  padding: 10px;
+  width: 100%;  // Botón ocupa todo el ancho disponible
+  padding: 12px;
   font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #388e3c;
 }

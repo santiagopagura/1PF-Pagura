@@ -5,6 +5,8 @@ import { CursosInterface } from '../models';
 import { CoursesService } from '../../../core/services/courses.service';
 import { tap } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
+import { Store } from '@ngrx/store';
+import { selectAuthRole } from '../../../core/auth/auth.selectors';
 
 
 const makeRandomId = (length: number): string => {
@@ -33,11 +35,15 @@ isLoading= false;
   constructor(
     private matDialog: MatDialog, 
     private coursesService: CoursesService,
-    private authService: AuthService) {}
+    private authService: AuthService,
+    private store:Store) {}
 
   ngOnInit(): void {
     this.loadCourses();
-    this.currentUserRole = this.authService.getUserRole();
+    this.store.select(selectAuthRole).subscribe(role => {
+      this.currentUserRole = role;
+    });
+    // this.currentUserRole = this.authService.getUserRole();
   }
   canEditClasses(): boolean {
     return this.currentUserRole === 'admin';

@@ -1,36 +1,27 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { map } from 'rxjs';
 
-// export const adminGuard: CanActivateFn = (route, state) => {
-//   const router = inject(Router);
-//   const store = inject(Store);
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { selectAuthState } from '../auth/auth.selectors';
 
-//   return store
-//     .select(selectAuthUser)
-//     .pipe(
-//       map((authUser) =>
-//         authUser?.role !== 'ADMIN'
-//           ? router.createUrlTree(['dashboard', 'home'])
-//           : true
-//       )
-//     );
-// };
+@Injectable({
+  providedIn: 'root'
+})
+export class AdminGuard implements CanActivate {
 
-export const adminGuard: CanActivateFn = (route, state) => {
-  const authService = inject(AuthService);
-  const router = inject(Router);
+  constructor(private store: Store, private router: Router) {}
 
-  return authService.authUser$.pipe(
-    map((authUser) => {
-      // if (!authUser) {
-      //   return router.createUrlTree(['auth', 'login'])
-      // }
-      return authUser?.role !== 'admin' 
-      ? router.createUrlTree(['dashboard', 'home'])
-      : true;
-    })
-  );
-};
- 
+  canActivate(): Observable<boolean> {
+    return this.store.select(selectAuthState).pipe(
+      map(authState => {
+        const isAdmin = authState?.role === 'admin';
+        if (!isAdmin) {
+          this.router.navigate(['/not-authorized']);
+        }
+        return isAdmin;
+      })
+    );
+  }
+}

@@ -41,3 +41,8 @@ export interface User {
   password: string;
   token: string;
 }
+
+export interface AuthResponse {
+  token: string;
+  role: string;
+}

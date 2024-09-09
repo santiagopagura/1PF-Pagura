@@ -1,0 +1,45 @@
+.container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #4a90e2;
+}
+
+.student-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.student-item {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.student-item:last-child {
+  border-bottom: none;
+}
+
+button {
+  padding: 8px;
+  margin: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #388e3c;
+}

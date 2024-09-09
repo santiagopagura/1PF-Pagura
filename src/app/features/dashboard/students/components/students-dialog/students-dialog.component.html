@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ studentToEdit ? 'Editando' +studentToEdit.name : 'Agregar nuevo alumno'}}</h2>
+<h2 mat-dialog-title>{{ studentToEdit ? 'Editando a ' +studentToEdit.name : 'Agregar nuevo alumno'}}</h2>
 <mat-dialog-content>
  <form [formGroup]="studentsForm" class="d-flex flex-column" >
     <mat-form-field>

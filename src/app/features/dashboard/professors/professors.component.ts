@@ -5,6 +5,8 @@ import { ProfessorsService } from '../../../core/services/professors.service';
 import { ProfessorsDialogComponent } from './components/professors-dialog/professors-dialog.component';
 import { tap } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
+import { selectAuthRole } from '../../../core/auth/auth.selectors';
+import { Store } from '@ngrx/store';
 
 
 // const Professors: ProfessorsInterface[] = [];
@@ -27,11 +29,14 @@ export class ProfessorsComponent implements OnInit {
   nombreAlumno ="";
   currentUserRole: string | null = null;
   
-constructor(private matDialog: MatDialog, private professorsService: ProfessorsService, private authService: AuthService){}
+constructor(private store: Store, private matDialog: MatDialog, private professorsService: ProfessorsService, private authService: AuthService){}
 
 ngOnInit(): void {
     this.loadProfessors();
-    this.currentUserRole = this.authService.getUserRole();
+    this.store.select(selectAuthRole).subscribe(role => {
+      this.currentUserRole = role;
+    });
+    // this.currentUserRole = this.authService.getUserRole();
   }
 
   
